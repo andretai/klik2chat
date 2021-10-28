@@ -1,14 +1,18 @@
 import React from 'react'
+import { auth, db } from '../config/firebase'
+import { addDoc, collection } from 'firebase/firestore'
 import { Box } from '@mui/system'
 import { Alert, Button, Snackbar, Stack, TextField, Typography, useMediaQuery, useTheme } from '@mui/material'
 import { DoubleArrow } from '@mui/icons-material'
+
+// const saved_numbers = collection(db, "saved_numbers")
 
 const Form = props => {
 
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
 
-  const { loggedIn } = props
+  const { login } = props
 
   // States
 
@@ -34,9 +38,14 @@ const Form = props => {
   }
 
   // Handle save.
-  const handleSave = () => {
-    console.log('hi')
+  const handleSave = async () => {
     if (nickname && number) { 
+      const res = await addDoc(collection(db, "saved_numbers"), {
+        user_id: auth.currentUser.uid,
+        nickname: nickname,
+        number: number
+      })
+      console.log(res)
       setError(true)
       setErrorLvl("success")
       setErrorMsg("Number is saved.")
@@ -74,7 +83,7 @@ const Form = props => {
       <form onSubmit={handleSubmit}>
         <Tip />
         {
-          loggedIn ?
+          login ?
           <TextField
             label="Nickname"
             type="text"
@@ -106,7 +115,7 @@ const Form = props => {
           <Button variant="contained" color="primary" type="submit" sx={{ width: '100%', color: '#fff' }}>
             chat now
           </Button>
-          {loggedIn ? <Button onClick={handleSave} variant="contained" color="secondary" type="button" sx={{width: '100%', color: '#fff' }}>
+          {login ? <Button onClick={handleSave} variant="contained" color="secondary" type="button" sx={{width: '100%', color: '#fff' }}>
             save</Button> : null}
         </Stack>
       </form>

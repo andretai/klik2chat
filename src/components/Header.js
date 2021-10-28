@@ -8,7 +8,7 @@ const Header = props => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
 
-  const { toggleDrawer } = props
+  const { toggleDrawer, handleLogin, handleRegister } = props
 
   return (
     <Box sx={{ paddingTop: '60px' }}>
@@ -27,8 +27,8 @@ const Header = props => {
                 </IconButton> 
                 : 
                 <Stack direction="row" spacing={2}>
-                  <Button variant="outlined" color="secondary">login</Button>
-                  <Button variant="contained" color="secondary" sx={{ color: '#fff' }}>signup</Button>
+                  <Button onClick={() => handleLogin()} variant="outlined" color="secondary">login</Button>
+                  <Button onClick={() => handleRegister()} variant="contained" color="secondary" sx={{ color: '#fff' }}>signup</Button>
                 </Stack>
             }
           </Toolbar>
