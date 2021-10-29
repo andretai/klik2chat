@@ -105,7 +105,7 @@ function App() {
         handleLogin={handleLogin} 
         toggleRegisterModal={toggleRegisterModal} 
       />
-      <SwipeableDrawer anchor="right" open={drawer} onClose={() => toggleDrawer(false)}>
+      <SwipeableDrawer anchor="right" open={drawer} onClose={() => toggleDrawer(false)} onOpen={() => toggleDrawer(true)}>
         <Box sx={{ padding: '15px' }}>
           {
             login ?
