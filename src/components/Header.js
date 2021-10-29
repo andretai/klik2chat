@@ -1,15 +1,17 @@
 import React from 'react'
+// nested components
+import Saved from './Saved'
+// styling
 import { Box } from '@mui/system'
 import { AppBar, Button, IconButton, Stack, Toolbar, Typography, useMediaQuery, useTheme } from '@mui/material'
 import { Menu, WhatsApp } from '@mui/icons-material'
-import Saved from './Saved'
 
 const Header = props => {
 
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
 
-  const { login, logout, toggleDrawer, handleLogin, handleRegister, numbers, setNumbers, fetchSavedNumbers, handleSubmitSavedNumber, handleDeleteSavedNumber } = props
+  const { login, logout, toggleDrawer, handleLogin, handleRegister, numbers, fetchSavedNumbers, handleSubmitSavedNumber, handleDeleteSavedNumber } = props
 
   const [saved, toggleSaved] = React.useState(false)
 
@@ -33,13 +35,39 @@ const Header = props => {
                   {
                     login ?
                     <Stack direction="row" spacing={2}>
-                      <Button onClick={() => toggleSaved(true)} variant="outlined" color="secondary">saved list</Button>
-                      <Button onClick={() => logout()} variant="contained" color="secondary" sx={{ color: '#fff' }}>sign out</Button>
+                      <Button 
+                        onClick={() => toggleSaved(true)} 
+                        variant="outlined" 
+                        color="secondary"
+                      >
+                        saved list
+                      </Button>
+                      <Button 
+                        onClick={() => logout()} 
+                        variant="contained" 
+                        color="secondary" 
+                        sx={{ color: '#fff' }}
+                      >
+                        sign out
+                      </Button>
                     </Stack>
                     :
                     <Stack direction="row" spacing={2}>
-                      <Button onClick={() => handleLogin()} variant="outlined" color="secondary">login</Button>
-                      <Button onClick={() => handleRegister()} variant="contained" color="secondary" sx={{ color: '#fff' }}>signup</Button>
+                      <Button 
+                        onClick={() => handleLogin()} 
+                        variant="outlined" 
+                        color="secondary"
+                      >
+                        login
+                      </Button>
+                      <Button 
+                        onClick={() => handleRegister()} 
+                        variant="contained" 
+                        color="secondary" 
+                        sx={{ color: '#fff' }}
+                      >
+                        signup
+                      </Button>
                     </Stack>
                   }
                 </>
@@ -55,7 +83,6 @@ const Header = props => {
         saved={saved} 
         toggleSaved={toggleSaved} 
         numbers={numbers} 
-        setNumbers={setNumbers}
         fetchSavedNumbers={fetchSavedNumbers}
         handleSubmitSavedNumber={handleSubmitSavedNumber}
         handleDeleteSavedNumber={handleDeleteSavedNumber}

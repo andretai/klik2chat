@@ -1,11 +1,12 @@
 import React from 'react'
-import { Button, Card, CardHeader, IconButton, Modal, Typography } from '@mui/material'
+// styling
 import { Box } from '@mui/system'
+import { Button, Card, CardHeader, IconButton, Modal, Typography } from '@mui/material'
 import { Delete, SendToMobile } from '@mui/icons-material'
 
 const Saved = props => {
 
-  const { saved, toggleSaved, numbers, setNumbers, fetchSavedNumbers, handleSubmitSavedNumber, handleDeleteSavedNumber } = props
+  const { saved, toggleSaved, numbers, fetchSavedNumbers, handleSubmitSavedNumber, handleDeleteSavedNumber } = props
 
   return (
     <Modal
@@ -24,7 +25,14 @@ const Saved = props => {
           borderRadius: 3
         }}
       >
-        <Button onClick={() => fetchSavedNumbers()} variant="outlined" color="secondary" sx={{ width: '100%' }}>update saved numbers</Button>
+        <Button 
+          onClick={() => fetchSavedNumbers()} 
+          variant="outlined" 
+          color="secondary" 
+          sx={{ width: '100%' }}
+        >
+          update saved numbers
+        </Button>
         {
           numbers.length === 0 ?
           <Box sx={{ marginTop: '15px', display: 'flex' }} justifyContent="center">
@@ -36,12 +44,22 @@ const Saved = props => {
               <Card key={index} sx={{ width: '100%', margin: '15px 0px' }}>
                 <CardHeader
                   avatar={
-                    <IconButton onClick={() => handleSubmitSavedNumber(number.number)} variant="text" type="button" color="secondary">
+                    <IconButton 
+                      onClick={() => handleSubmitSavedNumber(number.number)} 
+                      variant="text" 
+                      type="button" 
+                      color="secondary"
+                    >
                       <SendToMobile color="success" />
                     </IconButton>
                   }
                   action={
-                    <IconButton onClick={() => handleDeleteSavedNumber(number.number)} variant="text" type="button" color="secondary">
+                    <IconButton 
+                      onClick={() => handleDeleteSavedNumber(number.number)} 
+                      variant="text" 
+                      type="button" 
+                      color="secondary"
+                    >
                       <Delete color="warning" />
                     </IconButton>
                   }

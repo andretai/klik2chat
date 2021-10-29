@@ -1,17 +1,22 @@
 import React from 'react'
-import Header from './components/Header';
-import Form from './components/Form';
+// auth
 import { auth, db } from './config/firebase'
 import { collection, deleteDoc, getDocs, query, where } from 'firebase/firestore'
+// nested components
+import Header from './components/Header';
+import Form from './components/Form';
+import Login from './components/Login';
+import Register from './components/Register';
+// styling
 import { Box } from '@mui/system'
 import { Button, Card, CardHeader, Container, IconButton, Stack, SwipeableDrawer, Typography } from '@mui/material'
 import { Delete, SendToMobile } from '@mui/icons-material'
-import Login from './components/Login';
-import Register from './components/Register';
 
 const saved_numbers = collection(db, "saved_numbers")
 
 function App() {
+
+  // states
 
   const [drawer, toggleDrawer] = React.useState(false)
   const [loginModal, toggleLoginModal] = React.useState(false)
@@ -19,7 +24,7 @@ function App() {
   const [login, setLogin] = React.useState()
   const [numbers, setNumbers] = React.useState([])
 
-  // Functions
+  // functions
 
   const fetchSavedNumbers = async () => {
     let docs = []
@@ -87,7 +92,6 @@ function App() {
         handleLogin={handleLogin} 
         handleRegister={handleRegister} 
         numbers={numbers}
-        setNumbers={setNumbers}
         fetchSavedNumbers={fetchSavedNumbers}
         handleSubmitSavedNumber={handleSubmitSavedNumber}
         handleDeleteSavedNumber={handleDeleteSavedNumber}
@@ -105,13 +109,32 @@ function App() {
         handleLogin={handleLogin} 
         toggleRegisterModal={toggleRegisterModal} 
       />
-      <SwipeableDrawer anchor="right" open={drawer} onClose={() => toggleDrawer(false)} onOpen={() => toggleDrawer(true)}>
+      <SwipeableDrawer 
+        anchor="right" 
+        open={drawer} 
+        onClose={() => toggleDrawer(false)} 
+        onOpen={() => toggleDrawer(true)}
+      >
         <Box sx={{ padding: '15px' }}>
           {
             login ?
             <>
-              <Button onClick={() => logout()} variant="contained" color="secondary" sx={{ color: '#fff', width: '100%', marginBottom: '15px' }}>sign out</Button>
-              <Button onClick={() => fetchSavedNumbers()} variant="outlined" color="secondary" sx={{ width: '100%' }}>view saved numbers</Button>
+              <Button 
+                onClick={() => logout()} 
+                variant="contained" 
+                color="secondary" 
+                sx={{ color: '#fff', width: '100%', marginBottom: '15px' }}
+              >
+                sign out
+              </Button>
+              <Button 
+                onClick={() => fetchSavedNumbers()} 
+                variant="outlined" 
+                color="secondary" 
+                sx={{ width: '100%' }}
+              >
+                view saved numbers
+              </Button>
                 {
                   numbers.length === 0 ?
                   <Box sx={{ marginTop: '15px', display: 'flex' }} justifyContent="center">
@@ -123,12 +146,22 @@ function App() {
                       <Card key={index} sx={{ width: '100%', margin: '15px 0px' }}>
                         <CardHeader
                           avatar={
-                            <IconButton onClick={() => handleSubmitSavedNumber(number.number)} variant="text" type="button" color="secondary">
+                            <IconButton 
+                              onClick={() => handleSubmitSavedNumber(number.number)} 
+                              variant="text" 
+                              type="button" 
+                              color="secondary"
+                            >
                               <SendToMobile color="success" />
                             </IconButton>
                           }
                           action={
-                            <IconButton onClick={() => handleDeleteSavedNumber(number.number)} variant="text" type="button" color="secondary">
+                            <IconButton 
+                              onClick={() => handleDeleteSavedNumber(number.number)} 
+                              variant="text" 
+                              type="button" 
+                              color="secondary"
+                            >
                               <Delete color="warning" />
                             </IconButton>
                           }

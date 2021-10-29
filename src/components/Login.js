@@ -1,10 +1,12 @@
 import React from 'react'
+// auth
 import { auth, db } from '../config/firebase'
 import { collection, getDocs, query, where } from 'firebase/firestore'
+import { signInWithEmailAndPassword } from '@firebase/auth'
+// styling
 import { Box } from '@mui/system'
 import { Button, Modal, Stack, TextField, Typography } from '@mui/material'
 import { Facebook, Google } from '@mui/icons-material'
-import { signInWithEmailAndPassword } from '@firebase/auth'
 
 const saved_numbers = collection(db, "saved_numbers")
 
@@ -52,10 +54,18 @@ const Login = props => {
           borderRadius: 3
         }}
       >
-        <Typography variant="h5" color="secondary" sx={{ textAlign: 'center', fontWeight: 1000, marginBottom: '30px' }}>
+        <Typography 
+          variant="h5" 
+          color="secondary" 
+          sx={{ textAlign: 'center', fontWeight: 1000, marginBottom: '30px' }}
+        >
           Login to Your Account
         </Typography>
-        <Typography variant="body1" color="GrayText" sx={{ textAlign: 'center', fontWeight: 100, marginBottom: '30px' }}>
+        <Typography 
+          variant="body1" 
+          color="GrayText" 
+          sx={{ textAlign: 'center', fontWeight: 100, marginBottom: '30px' }}
+        >
           Don't have an account? <Button onClick={() => handleRegister()} type="button">Sign up for free</Button>
         </Typography>
         <form onSubmit={handleSubmit}>
@@ -84,7 +94,12 @@ const Login = props => {
           {/* <Typography variant="body1" >or</Typography> */}
           <hr></hr>
         </Stack>
-        <Stack direction="row" spacing={3} justifyContent="center" sx={{ marginBottom: '15px' }}>
+        <Stack 
+          direction="row" 
+          spacing={3} 
+          justifyContent="center" 
+          sx={{ marginBottom: '15px' }}
+        >
           <Facebook fontSize="large" color="info" />
           <Google fontSize="large" color="warning" />
         </Stack>

@@ -1,11 +1,11 @@
 import React from 'react'
+// auth
 import { auth, db } from '../config/firebase'
 import { addDoc, collection } from 'firebase/firestore'
+// styling
 import { Box } from '@mui/system'
 import { Alert, Button, Snackbar, Stack, TextField, Typography, useMediaQuery, useTheme } from '@mui/material'
 import { DoubleArrow } from '@mui/icons-material'
-
-// const saved_numbers = collection(db, "saved_numbers")
 
 const Form = props => {
 
@@ -25,7 +25,6 @@ const Form = props => {
 
   // Functions
 
-  // Handle form submit.
   const handleSubmit = e => {
     e.preventDefault()
     if (number) {
@@ -37,7 +36,6 @@ const Form = props => {
     }
   }
 
-  // Handle save.
   const handleSave = async () => {
     if (nickname && number) { 
       const res = await addDoc(collection(db, "saved_numbers"), {
@@ -57,7 +55,6 @@ const Form = props => {
     }
   }
 
-  // Handle error closure.
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return
@@ -68,7 +65,6 @@ const Form = props => {
 
   // Components
 
-  // Tip component under the submit button.
   const Tip = () => {
     return (
       <Stack direction="row" spacing={1} sx={{ margin: '30px 0px', display: 'flex', justifyContent: 'center' }}>
@@ -113,15 +109,42 @@ const Form = props => {
           sx={{ width: '100%', marginBottom: '15px' }}
         />
         <Stack direction={isMobile ? "column" : "row"} spacing={1}>
-          <Button variant="contained" color="primary" type="submit" sx={{ width: '100%', color: '#fff' }}>
+          <Button 
+            variant="contained" 
+            color="primary" 
+            type="submit" 
+            sx={{ width: '100%', color: '#fff' }}
+          >
             chat now
           </Button>
-          {login ? <Button onClick={handleSave} variant="contained" color="secondary" type="button" sx={{width: '100%', color: '#fff' }}>
-            save</Button> : null}
+          {
+            login ? 
+            <Button 
+              onClick={handleSave} 
+              variant="contained" 
+              color="secondary" 
+              type="button" 
+              sx={{width: '100%', color: '#fff' }}
+            >
+              save
+            </Button> 
+            : 
+            null
+          }
         </Stack>
       </form>
-      <Snackbar open={error} autoHideDuration={4000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity={errorLvl} sx={{ width: '100%' }}>{errorMsg}</Alert>
+      <Snackbar 
+        open={error} 
+        autoHideDuration={4000} 
+        onClose={handleClose}
+      >
+        <Alert 
+          onClose={handleClose} 
+          severity={errorLvl} 
+          sx={{ width: '100%' }}
+        >
+          {errorMsg}
+        </Alert>
       </Snackbar>
     </Box>
   )

@@ -1,6 +1,8 @@
 import React from 'react'
+// auth
 import { auth } from '../config/firebase'
 import { createUserWithEmailAndPassword } from '@firebase/auth'
+// styling
 import { Box } from '@mui/system'
 import { Alert, Button, Modal, Snackbar, Stack, TextField, Typography } from '@mui/material'
 
@@ -56,10 +58,18 @@ const Register = props => {
             borderRadius: 3
           }}
         >
-          <Typography variant="h5" color="secondary" sx={{ textAlign: 'center', fontWeight: 1000, marginBottom: '30px' }}>
+          <Typography 
+            variant="h5" 
+            color="secondary" 
+            sx={{ textAlign: 'center', fontWeight: 1000, marginBottom: '30px' }}
+          >
             Create Free Account
           </Typography>
-          <Typography variant="body1" color="GrayText" sx={{ textAlign: 'center', fontWeight: 100, marginBottom: '30px' }}>
+          <Typography 
+            variant="body1" 
+            color="GrayText" 
+            sx={{ textAlign: 'center', fontWeight: 100, marginBottom: '30px' }}
+          >
             Sign up to save numbers for easy access.
           </Typography>
           <form onSubmit={handleSubmit}>
@@ -100,7 +110,6 @@ const Register = props => {
           </form>
           <Stack direction="row" sx={{ margin: '15px 0px', fontWeight: 100 }}>
             <hr></hr>
-            {/* <Typography variant="body1" >or</Typography> */}
             <hr></hr>
           </Stack>
           <Button 
@@ -114,8 +123,18 @@ const Register = props => {
         </Box>
         
       </Modal>
-      <Snackbar open={error} autoHideDuration={4000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>{errorMsg}</Alert>
+      <Snackbar 
+        open={error} 
+        autoHideDuration={4000} 
+        onClose={handleClose}
+      >
+        <Alert 
+          onClose={handleClose} 
+          severity="error" 
+          sx={{ width: '100%' }}
+        >
+          {errorMsg}
+        </Alert>
       </Snackbar>
     </>
   )
