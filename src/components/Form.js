@@ -52,7 +52,7 @@ const Form = props => {
     } else {
       setError(true)
       setErrorLvl("error")
-      setErrorMsg("Please enter a nickname.")
+      setErrorMsg("Nickname or number is empty.")
     }
   }
 
@@ -79,7 +79,7 @@ const Form = props => {
   }
 
   return (
-    <Box sx={isMobile ? { marginTop: '30px' } : { marginTop: '60px', padding: '0px 60px' }}>
+    <Box sx={isMobile ? { marginTop: '30px' } : { marginTop: '30px', padding: '0px 60px' }}>
       <form onSubmit={handleSubmit}>
         <Tip />
         {

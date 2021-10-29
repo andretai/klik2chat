@@ -47,7 +47,8 @@ const Login = props => {
           transform: 'translate(-50%, -50%)', 
           bgcolor: 'background.paper',
           width: '330px',
-          padding: '15px'
+          padding: '15px',
+          borderRadius: 3
         }}
       >
         <Typography variant="h5" color="secondary" sx={{ textAlign: 'center', fontWeight: 1000, marginBottom: '30px' }}>

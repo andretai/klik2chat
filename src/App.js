@@ -2,10 +2,10 @@ import React from 'react'
 import Header from './components/Header';
 import Form from './components/Form';
 import { auth, db } from './config/firebase'
-import { collection, getDocs, query, where } from 'firebase/firestore'
+import { collection, deleteDoc, getDocs, query, where } from 'firebase/firestore'
 import { Box } from '@mui/system'
-import { Avatar, Button, Card, CardHeader, Container, Drawer, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, Stack, TextField, Typography } from '@mui/material'
-import { AccountCircle, Delete, SendToMobile } from '@mui/icons-material'
+import { Button, Card, CardHeader, Container, Drawer, IconButton, Stack, Typography } from '@mui/material'
+import { Delete, SendToMobile } from '@mui/icons-material'
 import Login from './components/Login';
 import Register from './components/Register';
 
@@ -19,6 +19,8 @@ function App() {
   const [login, setLogin] = React.useState()
   const [numbers, setNumbers] = React.useState([])
 
+  // Functions
+
   const fetchSavedNumbers = async () => {
     let docs = []
     const q = query(saved_numbers, where("user_id", "==", auth.currentUser.uid))
@@ -27,8 +29,8 @@ function App() {
       let data = snap.data()
       docs.push(data)
     })
-    const res = await setNumbers(docs)
-    console.log(numbers)
+    const res = setNumbers(docs)
+    console.log(res)
   }
 
   const handleLogin = () => {
@@ -51,26 +53,34 @@ function App() {
     toggleDrawer(false)
   }
 
-  const handleDeleteSavedNumber = number => {
-    setNumbers(numbers.filter(saved_number => {
-      return saved_number.number !== number.number
-    }))
+  const handleDeleteSavedNumber = async (numberOnly) => {
+    const nums = numbers.filter(number => {
+      return number.number !== numberOnly
+    })
+    const q = query(saved_numbers, where("number", "==", numberOnly))
+    const qSnap = await getDocs(q)
+    qSnap.forEach(snap => {
+      deleteDoc(snap.ref)
+    })
+    setNumbers(nums)
     console.log(numbers)
   }
+
+  // Auth
 
   auth.onAuthStateChanged(async user => {
     return user ? setLogin(true) : setLogin(false)
   })
 
   const logout = () => {
-    console.log(numbers)
+    toggleDrawer(false)
     auth.signOut()
   }
 
 
   return (
     <Container maxWidth="sm">
-      <Header toggleDrawer={toggleDrawer} handleLogin={handleLogin} handleRegister={handleRegister} />
+      <Header login={login} logout={logout} toggleDrawer={toggleDrawer} handleLogin={handleLogin} handleRegister={handleRegister} />
       <Form login={login} />
       <Login 
         loginModal={loginModal} 
@@ -90,12 +100,11 @@ function App() {
             login ?
             <>
               <Button onClick={() => logout()} variant="contained" color="secondary" sx={{ color: '#fff', width: '100%', marginBottom: '15px' }}>sign out</Button>
-              <Button onClick={() => fetchSavedNumbers()} variant="outlined" color="secondary" sx={{ width: '100%' }}>saved numbers</Button>
-              <List>
+              <Button onClick={() => fetchSavedNumbers()} variant="outlined" color="secondary" sx={{ width: '100%' }}>view saved numbers</Button>
                 {
                   numbers.length === 0 ?
-                  <Box sx={{ width: `180px` }}>
-                    <Typography>Your saved numbers will be shown here.</Typography>
+                  <Box sx={{ marginTop: '15px', display: 'flex' }} justifyContent="center">
+                    <Typography sx={{ width: `180px`, textAlign: 'center' }}>Your saved numbers will be shown here.</Typography>
                   </Box>
                   :
                   numbers.map((number, index) => {
@@ -116,22 +125,9 @@ function App() {
                           subheader={number.number}
                         />
                       </Card>
-                      // <ListItem
-                      //   secondaryAction={
-                      //     <IconButton edge="end">
-                      //       <Delete />
-                      //     </IconButton>
-                      //   }
-                      // >
-                      //   <Button key={index} onClick={() => handleSubmitSavedNumber(user.number)} variant="text" type="button" color="secondary">
-                      //     <ListItemAvatar><AccountCircle /></ListItemAvatar>
-                      //   </Button>
-                      //   <ListItemText primary={user.nickname} secondary={user.number} />                        
-                      // </ListItem>
                     )
                   })
                 }
-              </List>
             </>
             :
             <>
@@ -153,8 +149,8 @@ function App() {
                   signup
                 </Button>
               </Stack>
-              <Box sx={{ width: `180px` }}>
-                <Typography>Sign up to save numbers here for easy access.</Typography>
+              <Box sx={{ marginTop: '15px', display: 'flex' }} justifyContent="center">
+                <Typography sx={{ width: `180px`, textAlign: 'center' }}>Sign up to save numbers here for easy access.</Typography>
               </Box>
             </>
           }
