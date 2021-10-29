@@ -4,7 +4,7 @@ import Form from './components/Form';
 import { auth, db } from './config/firebase'
 import { collection, deleteDoc, getDocs, query, where } from 'firebase/firestore'
 import { Box } from '@mui/system'
-import { Button, Card, CardHeader, Container, Drawer, IconButton, Stack, Typography } from '@mui/material'
+import { Button, Card, CardHeader, Container, IconButton, Stack, SwipeableDrawer, Typography } from '@mui/material'
 import { Delete, SendToMobile } from '@mui/icons-material'
 import Login from './components/Login';
 import Register from './components/Register';
@@ -94,7 +94,7 @@ function App() {
         handleLogin={handleLogin} 
         toggleRegisterModal={toggleRegisterModal} 
       />
-      <Drawer anchor="right" open={drawer} onClose={() => toggleDrawer(false)}>
+      <SwipeableDrawer anchor="right" open={drawer} onClose={() => toggleDrawer(false)}>
         <Box sx={{ padding: '15px' }}>
           {
             login ?
@@ -155,7 +155,7 @@ function App() {
             </>
           }
         </Box>
-      </Drawer>
+      </SwipeableDrawer>
     </Container>
   )
 }
