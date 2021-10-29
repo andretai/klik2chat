@@ -29,8 +29,8 @@ function App() {
       let data = snap.data()
       docs.push(data)
     })
-    const res = setNumbers(docs)
-    console.log(res)
+    docs.sort((a, b) => b.created_at - a.created_at)
+    setNumbers(docs)
   }
 
   const handleLogin = () => {
@@ -80,7 +80,18 @@ function App() {
 
   return (
     <Container maxWidth="sm">
-      <Header login={login} logout={logout} toggleDrawer={toggleDrawer} handleLogin={handleLogin} handleRegister={handleRegister} />
+      <Header 
+        login={login} 
+        logout={logout} 
+        toggleDrawer={toggleDrawer} 
+        handleLogin={handleLogin} 
+        handleRegister={handleRegister} 
+        numbers={numbers}
+        setNumbers={setNumbers}
+        fetchSavedNumbers={fetchSavedNumbers}
+        handleSubmitSavedNumber={handleSubmitSavedNumber}
+        handleDeleteSavedNumber={handleDeleteSavedNumber}
+      />
       <Form login={login} />
       <Login 
         loginModal={loginModal} 

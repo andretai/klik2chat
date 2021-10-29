@@ -29,6 +29,7 @@ const Login = props => {
           console.log(data)
           docs.push(data)
         })
+        docs.sort((a, b) => b.created_at - a.created_at)
         setNumbers(docs)
         console.log(numbers)
       })

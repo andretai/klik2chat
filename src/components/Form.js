@@ -43,7 +43,8 @@ const Form = props => {
       const res = await addDoc(collection(db, "saved_numbers"), {
         user_id: auth.currentUser.uid,
         nickname: nickname,
-        number: number
+        number: number,
+        created_at: Date.now()
       })
       console.log(res)
       setError(true)
