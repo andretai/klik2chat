@@ -5,12 +5,14 @@
     {
       "src": "logo16.png",
       "type": "image/png",
-      "sizes": "16x16"
+      "sizes": "16x16",
+      "purpose": "maskable"
     },
     {
       "src": "logo48.png",
       "type": "image/png",
-      "sizes": "48x48"
+      "sizes": "48x48",
+      "purpose": "maskable"
     },
     {
       "src": "logo64.png",
@@ -21,7 +23,8 @@
     {
       "src": "logo128.png",
       "type": "image/png",
-      "sizes": "128x128"
+      "sizes": "128x128",
+      "purpose": "maskable"
     },
     {
       "src": "logo192.png",
@@ -32,11 +35,12 @@
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "maskable"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#000000"
+  "theme_color": "#37475a",
+  "background_color": "#37475a"
 }
