@@ -35,7 +35,7 @@ const Header = props => {
                 <>
                   {
                     login ?
-                    <Stack direction="row" spacing={2}>
+                    <Stack direction="row" spacing={1}>
                       <Button 
                         onClick={() => toggleSaved(true)} 
                         variant="outlined" 
