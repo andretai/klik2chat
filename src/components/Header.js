@@ -53,7 +53,7 @@ const Header = props => {
                       </Button>
                     </Stack>
                     :
-                    <Stack direction="row" spacing={2}>
+                    <Stack direction="row" spacing={1}>
                       <Button 
                         onClick={() => handleLogin()} 
                         variant="outlined" 
