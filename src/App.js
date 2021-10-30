@@ -14,14 +14,6 @@ import { Delete, SendToMobile } from '@mui/icons-material'
 
 const saved_numbers = collection(db, "saved_numbers")
 
-const classes = {
-  add_button: {
-    position: 'absolute',
-    top: '1px',
-    left: '1px'
-  }
-}
-
 function App() {
 
   // states

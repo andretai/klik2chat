@@ -22,7 +22,8 @@ const Header = props => {
           <Toolbar>
             <IconButton>
               <WhatsApp fontSize="large" color="primary" />
-              <Typography variant="body1" sx={{ fontWeight: 100, marginLeft: '5px' }}>Klik2Chat</Typography>
+              <Typography variant="h6" sx={{ fontWeight: 400, marginLeft: '5px' }}>Klik2Chat</Typography>
+              <Typography variant="caption" sx={{ marginLeft: '5px' }}> by ATS</Typography>
             </IconButton>
             <Box sx={{ flexGrow: 1 }}></Box>
             {
