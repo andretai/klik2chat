@@ -68,9 +68,9 @@ const Form = props => {
   const Tip = () => {
     return (
       <Stack direction="row" spacing={1} sx={{ margin: '30px 0px', display: 'flex', justifyContent: 'center' }}>
-        <Typography variant="body1" sx={{ fontWeight: 100 }}>{`e.g. +6012 861 2393`}</Typography>
+        <Typography variant="body1" sx={{ fontWeight: 100 }}>{`e.g. +6012 345 6789`}</Typography>
         <DoubleArrow fontSize="small" color="secondary" />
-        <Typography variant="body1" sx={{ fontWeight: 100 }}>{`60128612393`}</Typography>
+        <Typography variant="body1" sx={{ fontWeight: 100 }}>{`60123456789`}</Typography>
       </Stack>
     )
   }
