@@ -94,7 +94,7 @@ const Login = props => {
           {/* <Typography variant="body1" >or</Typography> */}
           <hr></hr>
         </Stack>
-        <Stack 
+        {/* <Stack 
           direction="row" 
           spacing={3} 
           justifyContent="center" 
@@ -102,7 +102,7 @@ const Login = props => {
         >
           <Facebook fontSize="large" color="info" />
           <Google fontSize="large" color="warning" />
-        </Stack>
+        </Stack> */}
       </Box>
     </Modal>
   )
