@@ -1,14 +1,21 @@
 import React from 'react'
 // auth
-import { auth } from '../config/firebase'
-import { createUserWithEmailAndPassword } from '@firebase/auth'
+import { auth, db } from '../config/firebase'
+import { createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from '@firebase/auth'
+import { collection, getDocs, query, where } from 'firebase/firestore'
 // styling
 import { Box } from '@mui/system'
-import { Alert, Button, Modal, Snackbar, Stack, TextField, Typography } from '@mui/material'
+import { Alert, Button, IconButton, Modal, Snackbar, Stack, TextField, Typography } from '@mui/material'
+import { Facebook, Google } from '@mui/icons-material'
+
+const saved_numbers = collection(db, "saved_numbers")
+
+const fbProvider = new FacebookAuthProvider()
+const goProvider = new GoogleAuthProvider()
 
 const Register = props => {
 
-  const { registerModal, handleLogin, toggleRegisterModal } = props
+  const { registerModal, handleLogin, toggleRegisterModal, numbers, setNumbers, setUsername } = props
 
   const [name, setName] = React.useState()
   const [email, setEmail] = React.useState()
@@ -38,6 +45,31 @@ const Register = props => {
       return
     }
     setError(false)
+  }
+
+  const handleOthers = provider => {
+    signInWithPopup(auth, provider)
+      .then(async result => {
+        const user = result.user
+        let docs = []
+        const q = query(saved_numbers, where("user_id", "==", user.uid))
+        const qSnap = await getDocs(q)
+        qSnap.forEach(snap => {
+          let data = snap.data()
+          console.log(data)
+          docs.push(data)
+        })
+        docs.sort((a, b) => b.created_at - a.created_at)
+        setNumbers(docs)
+        console.log(numbers)
+        toggleRegisterModal(false)
+        if (user.displayName) {
+          setUsername(user.displayName)
+        }
+      })
+      .catch(err => {
+        console.log('Social SignIn Err:', err)
+      })
   }
 
   return (
@@ -70,7 +102,14 @@ const Register = props => {
             color="GrayText" 
             sx={{ textAlign: 'center', fontWeight: 100, marginBottom: '30px' }}
           >
-            Sign up to save numbers for easy access.
+            Have an account already?
+            <Button 
+              onClick={() => handleLogin()}
+              variant="text"
+              type="button"
+            >
+              login
+            </Button>
           </Typography>
           <form onSubmit={handleSubmit}>
             <TextField
@@ -108,18 +147,25 @@ const Register = props => {
               signup
             </Button>
           </form>
-          <Stack direction="row" sx={{ margin: '15px 0px', fontWeight: 100 }}>
+          <Stack direction="row" sx={{ marginTop: '15px', fontWeight: 100 }}>
             <hr></hr>
             <hr></hr>
           </Stack>
-          <Button 
-            onClick={() => handleLogin()}
-            variant="outlined"
-            type="button"
-            sx={{ width: '100%', marginBottom: '15px' }}
+          <Stack 
+            direction="row" 
+            spacing={3} 
+            justifyContent="center"
           >
-            login
-          </Button>
+            <IconButton onClick={() => handleOthers(fbProvider)}>
+              <Facebook fontSize="large" color="info" />
+            </IconButton>
+            <IconButton onClick={() => handleOthers(goProvider)}>
+              <Google fontSize="large" color="warning" />
+            </IconButton>
+          </Stack>
+          <Typography variant="body1" sx={{ textAlign: 'center', fontWeight: 100, margin: '10px 0px' }}>
+            Sign Up via Facebook or Google
+          </Typography>
         </Box>
         
       </Modal>

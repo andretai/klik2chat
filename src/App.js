@@ -11,18 +11,25 @@ import Register from './components/Register';
 import { Box } from '@mui/system'
 import { Button, Card, CardHeader, Container, IconButton, Stack, SwipeableDrawer, Typography } from '@mui/material'
 import { Delete, SendToMobile } from '@mui/icons-material'
+import Reset from './components/Reset';
 
 const saved_numbers = collection(db, "saved_numbers")
 
 function App() {
+
+  React.useEffect(() => {
+    console.log('rerendered')
+  }, [])
 
   // states
 
   const [drawer, toggleDrawer] = React.useState(false)
   const [loginModal, toggleLoginModal] = React.useState(false)
   const [registerModal, toggleRegisterModal] = React.useState(false)
+  const [resetModal, toggleResetModal] = React.useState(false)
   const [login, setLogin] = React.useState()
   const [numbers, setNumbers] = React.useState([])
+  const [username, setUsername] = React.useState()
 
   // functions
 
@@ -43,6 +50,10 @@ function App() {
     toggleRegisterModal(false)
 
     toggleLoginModal(true)
+    auth.onAuthStateChanged(async user => {
+      console.log('authstatechanged')
+      return user ? setLogin(true) : setLogin(false)
+    })
   }
 
   const handleRegister = () => {
@@ -50,6 +61,17 @@ function App() {
     toggleLoginModal(false)
 
     toggleRegisterModal(true)
+    auth.onAuthStateChanged(async user => {
+      console.log('authstatechanged')
+      return user ? setLogin(true) : setLogin(false)
+    })
+  }
+
+  const handleReset = () => {
+    toggleDrawer(false)
+    toggleLoginModal(false)
+    toggleRegisterModal(false)
+    toggleResetModal(true)
   }
 
   const handleSubmitSavedNumber = number => {
@@ -73,12 +95,14 @@ function App() {
 
   // Auth
 
-  auth.onAuthStateChanged(async user => {
-    return user ? setLogin(true) : setLogin(false)
-  })
+  // auth.onAuthStateChanged(async user => {
+  //   console.log('authstatechanged')
+  //   return user ? setLogin(true) : setLogin(false)
+  // })
 
   const logout = () => {
     toggleDrawer(false)
+    setUsername()
     auth.signOut()
   }
 
@@ -95,19 +119,29 @@ function App() {
         fetchSavedNumbers={fetchSavedNumbers}
         handleSubmitSavedNumber={handleSubmitSavedNumber}
         handleDeleteSavedNumber={handleDeleteSavedNumber}
+        username={username}
       />
       <Form login={login} />
       <Login 
         loginModal={loginModal} 
         toggleLoginModal={toggleLoginModal}
         handleRegister={handleRegister}
+        handleReset={handleReset}
         numbers={numbers}
         setNumbers={setNumbers}
+        setUsername={setUsername}
       />
       <Register 
         registerModal={registerModal} 
         handleLogin={handleLogin} 
         toggleRegisterModal={toggleRegisterModal} 
+        numbers={numbers}
+        setNumbers={setNumbers}
+        setUsername={setUsername}
+      />
+      <Reset
+        resetModal={resetModal}
+        toggleResetModal={toggleResetModal}
       />
       <SwipeableDrawer 
         anchor="right" 
@@ -137,8 +171,9 @@ function App() {
               </Button>
                 {
                   numbers.length === 0 ?
-                  <Box sx={{ marginTop: '15px', display: 'flex' }} justifyContent="center">
-                    <Typography sx={{ width: `180px`, textAlign: 'center' }}>Your saved numbers will be shown here.</Typography>
+                  <Box sx={{ marginTop: '15px', textAlign: 'center' }} justifyContent="center">
+                    {/* <Typography variant="h6" sx={{ width: `180px`, margin:'auto', marginBottom: '5px', fontWeight: 1000 }}>Hello, {username ? username : 'user'}!</Typography> */}
+                    <Typography variant="body1" sx={{ width: `180px`, margin:'auto' }}>Your saved numbers will be shown here.</Typography>
                   </Box>
                   :
                   numbers.map((number, index) => {

@@ -6,7 +6,7 @@ import { Delete, SendToMobile } from '@mui/icons-material'
 
 const Saved = props => {
 
-  const { saved, toggleSaved, numbers, fetchSavedNumbers, handleSubmitSavedNumber, handleDeleteSavedNumber } = props
+  const { saved, toggleSaved, numbers, fetchSavedNumbers, handleSubmitSavedNumber, handleDeleteSavedNumber, username } = props
 
   return (
     <Modal
@@ -33,10 +33,11 @@ const Saved = props => {
         >
           update saved numbers
         </Button>
+        {/* <Typography variant="h6" sx={{ textAlign: 'center', marginTop: '10px', fontWeight: 500 }}>Hello, {username ? username : 'user'}!</Typography> */}
         {
           numbers.length === 0 ?
-          <Box sx={{ marginTop: '15px', display: 'flex' }} justifyContent="center">
-            <Typography sx={{ width: `180px`, textAlign: 'center' }}>Your saved numbers will be shown here.</Typography>
+          <Box sx={{ marginTop: '15px', textAlign: 'center' }} justifyContent="center">
+            <Typography variant="body1" sx={{ width: `180px`, margin:'auto' }}>Your saved numbers will be shown here.</Typography>
           </Box>
           :
           numbers.map((number, index) => {

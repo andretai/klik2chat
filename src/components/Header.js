@@ -11,7 +11,7 @@ const Header = props => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
 
-  const { login, logout, toggleDrawer, handleLogin, handleRegister, numbers, fetchSavedNumbers, handleSubmitSavedNumber, handleDeleteSavedNumber } = props
+  const { login, logout, toggleDrawer, handleLogin, handleRegister, numbers, fetchSavedNumbers, handleSubmitSavedNumber, handleDeleteSavedNumber, username } = props
 
   const [saved, toggleSaved] = React.useState(false)
 
@@ -87,6 +87,7 @@ const Header = props => {
         fetchSavedNumbers={fetchSavedNumbers}
         handleSubmitSavedNumber={handleSubmitSavedNumber}
         handleDeleteSavedNumber={handleDeleteSavedNumber}
+        username={username}
       />
     </Box>
   )
