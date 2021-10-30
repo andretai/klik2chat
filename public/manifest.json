@@ -5,26 +5,34 @@
     {
       "src": "logo16.png",
       "type": "image/png",
-      "sizes": "16x16",
-      "purpose": "maskable"
+      "sizes": "16x16"
     },
     {
       "src": "logo48.png",
       "type": "image/png",
-      "sizes": "48x48",
+      "sizes": "48x48"
+    },
+    {
+      "src": "logo64.png",
+      "type": "image/png",
+      "sizes": "64x64",
       "purpose": "maskable"
     },
     {
       "src": "logo128.png",
       "type": "image/png",
-      "sizes": "128x128",
+      "sizes": "128x128"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192",
       "purpose": "maskable"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "maskable"
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
