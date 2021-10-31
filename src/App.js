@@ -18,10 +18,6 @@ const saved_numbers = collection(db, "saved_numbers")
 
 function App() {
 
-  React.useEffect(() => {
-    console.log('rerendered')
-  }, [])
-
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
 
@@ -112,28 +108,30 @@ function App() {
 
 
   return (
-    <Grid container>
-      <Grid item xs={0} sm={4}><Ads /></Grid>
-      <Grid item xs={12} sm={4}>
-        <Header 
-          login={login} 
-          logout={logout} 
-          toggleDrawer={toggleDrawer} 
-          handleLogin={handleLogin} 
-          handleRegister={handleRegister} 
-          numbers={numbers}
-          fetchSavedNumbers={fetchSavedNumbers}
-          handleSubmitSavedNumber={handleSubmitSavedNumber}
-          handleDeleteSavedNumber={handleDeleteSavedNumber}
-          username={username}
-        />
-        <Box sx={isMobile ? { marginTop: '60px', padding: '0px 20px' } : { marginTop: '60px', padding: '0px 30px' }}>
-          <Typography variant="h5" sx={{ fontWeight: 1000, marginBottom: '30px' }}>Chat with someone on WhatsApp without having their phone number saved.</Typography>
-          <Typography variant="body1" sx={{ fontWeight: 100 }}>Just fill in the phone number including the international code but without the + sign.</Typography>
-        </Box>
-        <Form login={login} />
+    <>
+      <Header 
+        login={login} 
+        logout={logout} 
+        toggleDrawer={toggleDrawer} 
+        handleLogin={handleLogin} 
+        handleRegister={handleRegister} 
+        numbers={numbers}
+        fetchSavedNumbers={fetchSavedNumbers}
+        handleSubmitSavedNumber={handleSubmitSavedNumber}
+        handleDeleteSavedNumber={handleDeleteSavedNumber}
+        username={username}
+      />
+      <Grid container>
+        <Grid item xs={0} sm={4}><Ads /></Grid>
+        <Grid item xs={12} sm={4}>
+          <Box sx={isMobile ? { marginTop: '60px', padding: '0px 20px' } : { marginTop: '60px', padding: '0px 30px' }}>
+            <Typography variant="h5" sx={{ fontWeight: 1000, marginBottom: '30px' }}>Chat with someone on WhatsApp without having their phone number saved.</Typography>
+            <Typography variant="body1" sx={{ fontWeight: 100 }}>Just fill in the phone number including the international code but without the + sign.</Typography>
+          </Box>
+          <Form login={login} />
+        </Grid>
+        <Grid item xs={0} sm={4}><Ads /></Grid>
       </Grid>
-      <Grid item xs={0} sm={4}><Ads /></Grid>
       <Login 
         loginModal={loginModal} 
         toggleLoginModal={toggleLoginModal}
@@ -247,7 +245,8 @@ function App() {
           }
         </Box>
       </SwipeableDrawer>
-    </Grid>
+    
+    </>
   )
 }
 
