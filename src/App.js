@@ -9,9 +9,10 @@ import Login from './components/Login';
 import Register from './components/Register';
 // styling
 import { Box } from '@mui/system'
-import { Button, Card, CardHeader, Container, IconButton, Stack, SwipeableDrawer, Typography } from '@mui/material'
+import { Button, Card, CardHeader, Container, Grid, IconButton, Stack, SwipeableDrawer, Typography, useMediaQuery, useTheme } from '@mui/material'
 import { Delete, SendToMobile } from '@mui/icons-material'
 import Reset from './components/Reset';
+import Ads from './components/Ads';
 
 const saved_numbers = collection(db, "saved_numbers")
 
@@ -20,6 +21,9 @@ function App() {
   React.useEffect(() => {
     console.log('rerendered')
   }, [])
+
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
 
   // states
 
@@ -108,20 +112,28 @@ function App() {
 
 
   return (
-    <Container maxWidth="sm">
-      <Header 
-        login={login} 
-        logout={logout} 
-        toggleDrawer={toggleDrawer} 
-        handleLogin={handleLogin} 
-        handleRegister={handleRegister} 
-        numbers={numbers}
-        fetchSavedNumbers={fetchSavedNumbers}
-        handleSubmitSavedNumber={handleSubmitSavedNumber}
-        handleDeleteSavedNumber={handleDeleteSavedNumber}
-        username={username}
-      />
-      <Form login={login} />
+    <Grid container>
+      <Grid item xs={0} sm={4}><Ads /></Grid>
+      <Grid item xs={12} sm={4}>
+        <Header 
+          login={login} 
+          logout={logout} 
+          toggleDrawer={toggleDrawer} 
+          handleLogin={handleLogin} 
+          handleRegister={handleRegister} 
+          numbers={numbers}
+          fetchSavedNumbers={fetchSavedNumbers}
+          handleSubmitSavedNumber={handleSubmitSavedNumber}
+          handleDeleteSavedNumber={handleDeleteSavedNumber}
+          username={username}
+        />
+        <Box sx={isMobile ? { marginTop: '60px', padding: '0px 20px' } : { marginTop: '60px', padding: '0px 30px' }}>
+          <Typography variant="h5" sx={{ fontWeight: 1000, marginBottom: '30px' }}>Chat with someone on WhatsApp without having their phone number saved.</Typography>
+          <Typography variant="body1" sx={{ fontWeight: 100 }}>Just fill in the phone number including the international code but without the + sign.</Typography>
+        </Box>
+        <Form login={login} />
+      </Grid>
+      <Grid item xs={0} sm={4}><Ads /></Grid>
       <Login 
         loginModal={loginModal} 
         toggleLoginModal={toggleLoginModal}
@@ -235,7 +247,7 @@ function App() {
           }
         </Box>
       </SwipeableDrawer>
-    </Container>
+    </Grid>
   )
 }
 

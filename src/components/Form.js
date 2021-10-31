@@ -76,7 +76,7 @@ const Form = props => {
   }
 
   return (
-    <Box sx={isMobile ? { marginTop: '30px' } : { marginTop: '30px', padding: '0px 60px' }}>
+    <Box sx={isMobile ? { marginTop: '30px', padding: '0px 20px' } : { marginTop: '30px', padding: '0px 30px' }}>
       <form onSubmit={handleSubmit}>
         <Tip />
         {
