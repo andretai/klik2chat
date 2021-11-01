@@ -31,12 +31,12 @@ const Login = props => {
         const qSnap = await getDocs(q)
         qSnap.forEach(snap => {
           let data = snap.data()
-          console.log(data)
+          // console.log(data)
           docs.push(data)
         })
         docs.sort((a, b) => b.created_at - a.created_at)
         setNumbers(docs)
-        console.log(numbers)
+        // console.log(numbers)
         if (user.displayName) {
           setUsername(user.displayName)
         }
@@ -52,19 +52,19 @@ const Login = props => {
         const qSnap = await getDocs(q)
         qSnap.forEach(snap => {
           let data = snap.data()
-          console.log(data)
+          // console.log(data)
           docs.push(data)
         })
         docs.sort((a, b) => b.created_at - a.created_at)
         setNumbers(docs)
-        console.log(numbers)
+        // console.log(numbers)
         toggleLoginModal(false)
         if (user.displayName) {
           setUsername(user.displayName)
         }
       })
       .catch(err => {
-        console.log('Social SignIn Err:', err)
+        // console.log('Social SignIn Err:', err)
       })
   }
 
