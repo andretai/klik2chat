@@ -12,7 +12,6 @@ import { Box } from '@mui/system'
 import { Button, Card, CardHeader, Container, Grid, IconButton, Stack, SwipeableDrawer, Typography, useMediaQuery, useTheme } from '@mui/material'
 import { Delete, SendToMobile } from '@mui/icons-material'
 import Reset from './components/Reset';
-import Ads from './components/Ads';
 
 const saved_numbers = collection(db, "saved_numbers")
 
@@ -122,15 +121,15 @@ function App() {
         username={username}
       />
       <Grid container>
-        <Grid item xs={0} sm={4}><Ads /></Grid>
+        <Grid item xs={0} sm={4}></Grid>
         <Grid item xs={12} sm={4}>
-          <Box sx={isMobile ? { marginTop: '60px', padding: '0px 20px' } : { marginTop: '60px', padding: '0px 30px' }}>
+          <Box sx={{ padding: '60px 30px' }}>
             <Typography variant="h5" sx={{ fontWeight: 1000, marginBottom: '30px' }}>Chat with someone on WhatsApp without having their phone number saved.</Typography>
             <Typography variant="body1" sx={{ fontWeight: 100 }}>Just fill in the phone number including the international code but without the + sign.</Typography>
           </Box>
           <Form login={login} />
         </Grid>
-        <Grid item xs={0} sm={4}><Ads /></Grid>
+        <Grid item xs={0} sm={4}></Grid>
       </Grid>
       <Login 
         loginModal={loginModal} 
