@@ -17,7 +17,7 @@ const Header = props => {
 
   return (
     <Box sx={{ paddingTop: '60px' }}>
-      <AppBar sx={{ background: 'transparent', boxShadow: 'none' }}>
+      <AppBar position="absolute" sx={{ background: 'transparent', boxShadow: 'none' }}>
         <Box>
           <Toolbar>
             <IconButton>

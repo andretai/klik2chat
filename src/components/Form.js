@@ -67,16 +67,27 @@ const Form = props => {
 
   const Tip = () => {
     return (
-      <Stack direction="row" spacing={1} sx={{ margin: '30px 0px', display: 'flex', justifyContent: 'center' }}>
+      <Stack 
+        direction={isMobile ? "column" : "row"} 
+        spacing={1} 
+        sx={
+          isMobile ?
+            { marginBottom: '30px', display: 'flex', justifyContent: 'center', textAlign: 'center' }
+            :
+            { marginBottom: '30px', display: 'flex', justifyContent: 'center' }
+        }
+      >
         <Typography variant="body1" sx={{ fontWeight: 100 }}>{`e.g. +6012 345 6789`}</Typography>
-        <DoubleArrow fontSize="small" color="secondary" />
+        <Box>
+          <DoubleArrow fontSize="small" color="secondary" />
+        </Box>
         <Typography variant="body1" sx={{ fontWeight: 100 }}>{`60123456789`}</Typography>
       </Stack>
     )
   }
 
   return (
-    <Box sx={isMobile ? { marginTop: '30px', padding: '0px 20px' } : { marginTop: '30px', padding: '0px 30px' }}>
+    <Box sx={{ padding: '30px 20px 120px 20px'}}>
       <form onSubmit={handleSubmit}>
         <Tip />
         {

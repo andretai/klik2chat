@@ -120,16 +120,16 @@ function App() {
         handleDeleteSavedNumber={handleDeleteSavedNumber}
         username={username}
       />
-      <Grid container>
-        <Grid item xs={0} sm={4}></Grid>
-        <Grid item xs={12} sm={4}>
-          <Box sx={{ padding: '60px 30px' }}>
+      <Grid container sx={{ paddingTop: '60px' }}>
+        <Grid item xs={0} sm={2} md={4}></Grid>
+        <Grid item xs={12} sm={8} md={4}>
+          <Box sx={{ padding: '0px 25px' }}>
             <Typography variant="h5" sx={{ fontWeight: 1000, marginBottom: '30px' }}>Chat with someone on WhatsApp without having their phone number saved.</Typography>
             <Typography variant="body1" sx={{ fontWeight: 100 }}>Just fill in the phone number including the international code but without the + sign.</Typography>
           </Box>
           <Form login={login} />
         </Grid>
-        <Grid item xs={0} sm={4}></Grid>
+        <Grid item xs={0} sm={2} md={4}></Grid>
       </Grid>
       <Login 
         loginModal={loginModal} 
