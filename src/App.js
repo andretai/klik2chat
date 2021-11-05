@@ -9,7 +9,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 // styling
 import { Box } from '@mui/system'
-import { Button, Card, CardHeader, Container, Grid, IconButton, Stack, SwipeableDrawer, Typography, useMediaQuery, useTheme } from '@mui/material'
+import { Button, Card, CardHeader, Grid, IconButton, Link, Stack, SwipeableDrawer, Typography, useMediaQuery, useTheme } from '@mui/material'
 import { Delete, SendToMobile } from '@mui/icons-material'
 import Reset from './components/Reset';
 
@@ -244,7 +244,7 @@ function App() {
           }
         </Box>
       </SwipeableDrawer>
-    
+      <Typography sx={{ marginBottom: '30px', textAlign: 'center'}}>Find us on <Link href="https://www.facebook.com/atechs.com.my" target="_blank" underline="none" sx={{ fontWeight: 1000 }}>Facebook</Link>.</Typography>
     </>
   )
 }
