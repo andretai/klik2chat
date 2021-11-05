@@ -12,6 +12,7 @@ import { Box } from '@mui/system'
 import { Button, Card, CardHeader, Grid, IconButton, Link, Stack, SwipeableDrawer, Typography, useMediaQuery, useTheme } from '@mui/material'
 import { Delete, SendToMobile } from '@mui/icons-material'
 import Reset from './components/Reset';
+import Popup from './components/Popup';
 
 const saved_numbers = collection(db, "saved_numbers")
 
@@ -26,6 +27,7 @@ function App() {
   const [loginModal, toggleLoginModal] = React.useState(false)
   const [registerModal, toggleRegisterModal] = React.useState(false)
   const [resetModal, toggleResetModal] = React.useState(false)
+  const [popModal, togglePopModal] = React.useState(true)
   const [login, setLogin] = React.useState()
   const [numbers, setNumbers] = React.useState([])
   const [username, setUsername] = React.useState()
@@ -151,6 +153,10 @@ function App() {
       <Reset
         resetModal={resetModal}
         toggleResetModal={toggleResetModal}
+      />
+      <Popup
+        popModal={popModal}
+        togglePopModal={togglePopModal}
       />
       <SwipeableDrawer 
         anchor="right" 
