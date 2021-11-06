@@ -81,67 +81,44 @@ const Login = props => {
           transform: 'translate(-50%, -50%)', 
           bgcolor: 'background.paper',
           width: '330px',
-          padding: '15px',
+          padding: '30px 15px',
           borderRadius: 3
         }}
       >
-        <Typography 
-          variant="h5" 
-          color="secondary" 
-          sx={{ textAlign: 'center', fontWeight: 1000, marginBottom: '30px' }}
-        >
-          Login to Your Account
+        <Typography variant="h6" sx={{ textAlign: 'center', fontWeight: 300, margin: '10px 0px' }}>
+          Sign In via Facebook or Google
         </Typography>
-        <Typography 
-          variant="body1" 
-          color="GrayText" 
-          sx={{ textAlign: 'center', fontWeight: 100, marginBottom: '30px' }}
-        >
-          Don't have an account? <Button onClick={() => handleRegister()} type="button">Sign up for free</Button>
-        </Typography>
-        <form onSubmit={handleSubmit}>
-          <TextField
-            label="Email"
-            type="email"
-            onChange={({target}) => setEmail(target.value)}
-            sx={{ width: '100%', marginBottom: '15px' }}
-          />
-          <TextField
-            label="Password"
-            type="password"
-            onChange={({target}) => setPassword(target.value)}
-            sx={{ width: '100%', marginBottom: '15px' }}
-          />
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Button onClick={() => handleReset()} variant="text" color="inherit" sx={{ marginBottom: '15px' }}>Forgot password?</Button>
-          </Box>
-          <Button 
-            variant="contained"
-            type="submit"
-            sx={{ width: '100%', color: '#fff' }}
-          >
-            login
-          </Button>
-        </form>
-        <Stack direction="row" sx={{ marginTop: '15px', fontWeight: 100 }}>
-          <hr></hr>
-          {/* <Typography variant="body1" >or</Typography> */}
-          <hr></hr>
-        </Stack>
         <Stack 
           direction="row" 
-          spacing={3} 
+          spacing={1} 
           justifyContent="center"
+          sx={{ margin: '30px 0px'}}  
         >
-          <IconButton onClick={() => handleOthers(fbProvider)}>
-            <Facebook fontSize="large" color="info" />
-          </IconButton>
-          <IconButton onClick={() => handleOthers(goProvider)}>
-            <Google fontSize="large" color="warning" />
-          </IconButton>
+          <Button 
+            variant="contained" 
+            color="info" 
+            sx={{ width: '50%', padding: '10px 0px' }}
+            onClick={() => handleOthers(fbProvider)}
+          >
+            <Facebook sx={{ marginRight: '5px' }} />
+            Facebook
+          </Button>
+          <Button 
+            variant="outlined" 
+            color="warning" 
+            sx={{ width: '50%', padding: '10px 0px' }}
+            onClick={() => handleOthers(goProvider)}
+          >
+            <Google sx={{ marginRight: '5px' }} />
+            Google
+          </Button>
         </Stack>
-        <Typography variant="body1" sx={{ textAlign: 'center', fontWeight: 100, margin: '10px 0px' }}>
-          Sign In via Facebook or Google
+        <Typography 
+          variant="h6" 
+          color="GrayText" 
+          sx={{ textAlign: 'center', fontWeight: 100 }}
+        >
+          Don't have an account? <Button onClick={() => handleRegister()} type="button" color="secondary"><Typography variant="body1" sx={{ textTransform: 'uppercase', fontWeight: 1000 }}>Sign up for free</Typography></Button>
         </Typography>
       </Box>
     </Modal>

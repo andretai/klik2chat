@@ -86,88 +86,46 @@ const Register = props => {
             transform: 'translate(-50%, -50%)', 
             bgcolor: 'background.paper',
             width: '330px',
-            padding: '15px',
+            padding: '30px 15px',
             borderRadius: 3
           }}
         >
-          <Typography 
-            variant="h5" 
-            color="secondary" 
-            sx={{ textAlign: 'center', fontWeight: 1000, marginBottom: '30px' }}
-          >
-            Create Free Account
+          <Typography variant="h6" sx={{ textAlign: 'center', fontWeight: 300, margin: '10px 0px' }}>
+            Sign Up with Facebook or Google
           </Typography>
-          <Typography 
-            variant="body1" 
-            color="GrayText" 
-            sx={{ textAlign: 'center', fontWeight: 100, marginBottom: '30px' }}
-          >
-            Have an account already?
-            <Button 
-              onClick={() => handleLogin()}
-              variant="text"
-              type="button"
-            >
-              login
-            </Button>
-          </Typography>
-          <form onSubmit={handleSubmit}>
-            <TextField
-              label="Name"
-              type="name"
-              inputProps={{
-                maxLength: 13
-              }}
-              onChange={({target}) => setName(target.value)}
-              sx={{ width: '100%', marginBottom: '15px' }}
-            />
-            <TextField
-              label="Email"
-              type="email"
-              onChange={({target}) => setEmail(target.value)}
-              sx={{ width: '100%', marginBottom: '15px' }}
-            />
-            <TextField
-              label="Password"
-              type="password"
-              onChange={({target}) => setPassword(target.value)}
-              sx={{ width: '100%', marginBottom: '15px' }}
-            />
-            <TextField
-              label="Confirm Password"
-              type="password"
-              onChange={({target}) => setConfirm(target.value)}
-              sx={{ width: '100%', marginBottom: '30px' }}
-            />
-            <Button 
-              variant="contained"
-              type="submit"
-              sx={{ width: '100%', color: '#fff' }}
-            >
-              signup
-            </Button>
-          </form>
-          <Stack direction="row" sx={{ marginTop: '15px', fontWeight: 100 }}>
-            <hr></hr>
-            <hr></hr>
-          </Stack>
           <Stack 
             direction="row" 
-            spacing={3} 
+            spacing={1} 
             justifyContent="center"
+            sx={{ margin: '30px 0px'}}
           >
-            <IconButton onClick={() => handleOthers(fbProvider)}>
-              <Facebook fontSize="large" color="info" />
-            </IconButton>
-            <IconButton onClick={() => handleOthers(goProvider)}>
-              <Google fontSize="large" color="warning" />
-            </IconButton>
+            <Button 
+              variant="contained" 
+              color="info" 
+              sx={{ width: '50%', padding: '10px 0px' }}
+              onClick={() => handleOthers(fbProvider)}
+            >
+            <Facebook sx={{ marginRight: '5px' }} />
+              Facebook
+            </Button>
+          <Button 
+            variant="outlined" 
+            color="warning" 
+            sx={{ width: '50%', padding: '10px 0px' }}
+            onClick={() => handleOthers(goProvider)}
+          >
+            <Google sx={{ marginRight: '5px' }} />
+            Google
+          </Button>
           </Stack>
-          <Typography variant="body1" sx={{ textAlign: 'center', fontWeight: 100, margin: '10px 0px' }}>
-            Sign Up via Facebook or Google
+          <Typography 
+            variant="h6" 
+            color="GrayText" 
+            sx={{ textAlign: 'center', fontWeight: 100 }}
+          >
+            Have an account already? <Button onClick={() => handleLogin()} type="button" color="secondary"><Typography variant="body1" sx={{ textTransform: 'uppercase', fontWeight: 1000 }}>sign in now</Typography></Button>
           </Typography>
         </Box>
-        
       </Modal>
       <Snackbar 
         open={error} 
