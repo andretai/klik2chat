@@ -154,10 +154,10 @@ function App() {
         resetModal={resetModal}
         toggleResetModal={toggleResetModal}
       />
-      <Popup
+      {/* <Popup
         popModal={popModal}
         togglePopModal={togglePopModal}
-      />
+      /> */}
       <SwipeableDrawer 
         anchor="right" 
         open={drawer} 
