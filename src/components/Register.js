@@ -1,11 +1,12 @@
 import React from 'react'
 // auth
-import { auth, db } from '../config/firebase'
-import { createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from '@firebase/auth'
+import { analytics, auth, db } from '../config/firebase'
+import { logEvent } from 'firebase/analytics'
+import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from '@firebase/auth'
 import { collection, getDocs, query, where } from 'firebase/firestore'
 // styling
 import { Box } from '@mui/system'
-import { Alert, Button, IconButton, Modal, Snackbar, Stack, TextField, Typography } from '@mui/material'
+import { Alert, Button, Modal, Snackbar, Stack, Typography } from '@mui/material'
 import { Facebook, Google } from '@mui/icons-material'
 
 const saved_numbers = collection(db, "saved_numbers")
@@ -15,30 +16,10 @@ const goProvider = new GoogleAuthProvider()
 
 const Register = props => {
 
-  const { registerModal, handleLogin, toggleRegisterModal, numbers, setNumbers, setUsername } = props
+  const { registerModal, handleLogin, toggleRegisterModal, setNumbers, setUsername } = props
 
-  const [name, setName] = React.useState()
-  const [email, setEmail] = React.useState()
-  const [password, setPassword] = React.useState()
-  const [confirm, setConfirm] = React.useState()
   const [error, setError] = React.useState(false)
   const [errorMsg, setErrorMsg] = React.useState()
-
-  const handleSubmit = e => {
-    e.preventDefault()
-    if (!(name && email && password && confirm)) {
-      setError(true)
-      setErrorMsg("Please fill in all the fields.")
-    } else if (password !== confirm) {
-      setError(true)
-      setErrorMsg("Passwords do not match.")
-    } else {
-      createUserWithEmailAndPassword(auth, email, password)
-      .then(async credentials => {
-        toggleRegisterModal(false)
-      })
-    }
-  }
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -50,25 +31,31 @@ const Register = props => {
   const handleOthers = provider => {
     signInWithPopup(auth, provider)
       .then(async result => {
+        if (provider === goProvider) {
+          logEvent(analytics, "sign_up", {
+            method: "Google"
+          })
+        } else {
+          logEvent(analytics, "sign_up", {
+            method: "Facebook"
+          })
+        }
         const user = result.user
         let docs = []
         const q = query(saved_numbers, where("user_id", "==", user.uid))
         const qSnap = await getDocs(q)
         qSnap.forEach(snap => {
           let data = snap.data()
-          // console.log(data)
           docs.push(data)
         })
         docs.sort((a, b) => b.created_at - a.created_at)
         setNumbers(docs)
-        // console.log(numbers)
         toggleRegisterModal(false)
         if (user.displayName) {
           setUsername(user.displayName)
         }
       })
       .catch(err => {
-        // console.log('Social SignIn Err:', err)
       })
   }
 

@@ -18,7 +18,7 @@ const Form = props => {
 
   const [nickname, setNickname] = React.useState()
   const [number, setNumber] = React.useState()
-  const [message, setMessage] = React.useState()
+  const [message, setMessage] = React.useState("")
   const [error, setError] = React.useState(false)
   const [errorLvl, setErrorLvl] = React.useState()
   const [errorMsg, setErrorMsg] = React.useState()
