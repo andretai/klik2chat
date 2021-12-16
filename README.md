@@ -1,6 +1,6 @@
 # Klik2Chat
 
-A React progressive web application that provides click-to-chat function for unsaved Whatsapp number(s).
+A React progressive web application that provides the click-to-chat function for unsaved Whatsapp number(s) with authentication and storage for registered users.
 
 # Active Demo
 
