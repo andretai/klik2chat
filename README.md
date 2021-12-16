@@ -4,11 +4,15 @@ A React progressive web application that provides click-to-chat function for uns
 
 # Active Demo
 
-### http://klik2chat.atechs.com.my/
+``` 
+https://klik2chat.atechs.com.my/ 
+```
 
 # Installation and Setup
 
-### git clone https://github.com/andretai/klik2chat.git
-### cd klik2chat
-### yarn install
-### yarn start
+``` 
+git clone https://github.com/andretai/klik2chat.git
+cd klik2chat
+yarn install
+yarn start
+```
